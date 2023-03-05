@@ -1,0 +1,39 @@
+<div class="data-display-container">
+  <% if (todayData.length > 0) { %>
+    <% todayData.forEach(Done => { %> 
+      <div class = "content">
+          <div>
+            <h3><%= new Date(Done.Date).toDateString() %></h3>
+          <a class="remove-btn" data-doc="<%= Done._id %>">
+            <ion-icon name="trash-outline"></ion-icon>
+          </a>
+          </div>
+          <p><%= Done.Content %></p>
+      </div>
+      <% }) %>
+    <% } %>
+</div>
+
+
+<script>
+
+let removeButton = document.querySelector(".remove-btn");
+
+removeButton.addEventListener("click", function(e){
+
+  let endpoint =  `/Home${removeButton.dataset.doc}`;
+
+  fetch(endpoint, {
+    method: "DELETE"
+  })
+  .then((response) =>{
+    response.json();
+  })
+  .then((data) =>{
+    console.log(data);
+    location.reload();
+  })
+  .catch(err => console.log(err));
+})
+
+</script>
