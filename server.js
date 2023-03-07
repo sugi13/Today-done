@@ -11,8 +11,9 @@ app.use(express.static("public"));
 // initializing MONGODB //
 const URL = 'mongodb+srv://sukant:sukant13@cluster0.rpnpehh.mongodb.net/?retryWrites=true&w=majority';
 
-mongoose.connect(URL)
-.then((res) =>{
+mongoose.connect(URL,{ useNewUrlParser: true, 
+  useUnifiedTopology: true})
+.then(() =>{
   console.log("Database connected!");
 })
 .catch((err) =>{
@@ -24,6 +25,3 @@ app.use(routes);
 
 // PORT listening //
 app.listen("3000");
-
-
-/* Done.Date */
