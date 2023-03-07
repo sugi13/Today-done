@@ -18,9 +18,9 @@ const todaysCreate_get = (req, res) =>{
 }
 
 // post data to DB //
-const todaysCreate_post = (req, res) =>{
+const todaysCreate_post = async(req, res) =>{
   console.log(req.body);
-  let today = new todaysDone(req.body);
+  let today = await new todaysDone(req.body);
   // saved to DB //
   today.save()
   .then((result) =>{
@@ -33,7 +33,7 @@ const todaysCreate_post = (req, res) =>{
 
 
 // delete request //
-const todaysDelete_delete = (req, res) =>{
+const todaysDelete_delete =(req, res) =>{
   const id = req.params.id;
   todaysDone.findByIdAndDelete(id)
   .then((result) =>{
